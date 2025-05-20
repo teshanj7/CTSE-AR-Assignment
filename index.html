@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Park AR Experience</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/ar.js/2.2.1/aframe/build/aframe-ar.min.js"></script>
+    <style>
+      #start-btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        z-index: 9999;
+      }
+    </style>
+  </head>
+  <body style="margin: 0; overflow: hidden">
+    <!-- Start Button -->
+    <button id="start-btn">Start Experience</button>
+
+    <!-- AR Scene -->
+    <a-scene embedded arjs="sourceType: webcam;" vr-mode-ui="enabled: false">
+
+      <a-entity camera></a-entity>
+
+      <!-- Tree Marker -->
+      <a-marker type="pattern" url="markers/pattern-tree.patt">
+        <a-entity gltf-model="models/tree.glb" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+      </a-marker>
+
+      <!-- Dog Marker -->
+      <a-marker type="pattern" url="markers/pattern-dog.patt">
+        <a-entity gltf-model="models/dog.glb" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+      </a-marker>
+
+      <!-- Bench Marker -->
+      <a-marker type="pattern" url="markers/pattern-bench.patt">
+        <a-entity gltf-model="models/bench.glb" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+      </a-marker>
+
+      <!-- Tent Marker -->
+      <a-marker type="pattern" url="markers/pattern-tent.patt">
+        <a-entity gltf-model="models/tent.glb" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+      </a-marker>
+
+      <!-- Lighting -->
+      <a-entity light="type: ambient; color: #ccc"></a-entity>
+      <a-entity light="type: directional; intensity: 0.8" position="1 1 1"></a-entity>
+    </a-scene>
+
+    <!-- Ambient Background Audio -->
+    <audio id="ambient-audio" src="assets/ambient.mp3" loop></audio>
+
+    <!-- Script for Button Functionality -->
+    <script>
+      const startButton = document.getElementById("start-btn");
+      const ambientAudio = document.getElementById("ambient-audio");
+
+      startButton.addEventListener("click", () => {
+        ambientAudio.play();
+        startButton.style.display = "none";
+      });
+    </script>
+  </body>
+</html>
